@@ -26,4 +26,9 @@ public class PoolableObject : MonoBehaviour, IPoolableObject
     {
         gameObject.SetActive(active);
     }
+
+    private void OnDestroy()
+    {
+        OnRemoveFromPoolRequested?.Invoke(this);
+    }
 }
