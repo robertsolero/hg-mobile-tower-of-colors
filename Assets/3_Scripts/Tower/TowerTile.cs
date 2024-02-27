@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerTile : MonoBehaviour
+public class TowerTile : PoolableObject
 {
     [SerializeField]
     protected new MeshRenderer renderer;
@@ -33,6 +34,8 @@ public class TowerTile : MonoBehaviour
     private bool initialized;
     private bool freezed;
 
+    public Tower Tower { get; set; }
+    
     protected virtual void Awake()
     {
         TileColorManager.Instance.OnColorListChanged += ResetColor;
@@ -53,7 +56,8 @@ public class TowerTile : MonoBehaviour
                 nextCheckTime = Time.time + raycastCheckInterval;
                 if (!Physics.Raycast(rigidbody.worldCenterOfMass, Vector3.down, rigidbody.worldCenterOfMass.y + 1, 1 << 9)) {
                     Active = false;
-                    OnTileDestroyed?.Invoke(this);
+                    if (Tower != null) 
+                        Tower.OnTileDestroyed(this);
                 }
             }
         } else if (!freezed) {
@@ -97,6 +101,26 @@ public class TowerTile : MonoBehaviour
     public virtual void SetColor(Color color)
     {
         renderer.sharedMaterial = TileColorManager.GetSharedMaterial(originalMaterial, color);
+    }
+
+    public override void OnInstantiatedOnPool()
+    {
+        SetFreezed(true);
+        base.OnInstantiatedOnPool();
+    }
+
+    public override void AddedBackToPool()
+    {
+        connectedTiles = new List<TowerTile>();
+        SetFreezed(true);
+        base.AddedBackToPool();
+    }
+
+    public override void OnRetrievedFromPool()
+    {
+        connectedTiles = new List<TowerTile>();
+        SetFreezed(true);
+        base.OnRetrievedFromPool();
     }
 
     public void SetFreezed(bool value)
@@ -148,12 +172,27 @@ public class TowerTile : MonoBehaviour
         for (int i = 0; i < connectedTiles.Count; i++) {
             connectedTiles[i]?.Explode(false);
         }
-        OnTileDestroyed?.Invoke(this);
+        if (Tower!= null)
+            Tower.OnTileDestroyed(this);
+        
         ParticleSystem fx = FxPool.Instance.GetPooled(explosionFx, transform.position, Quaternion.identity);
         if (colorizeFx) {
             ParticleSystem.MainModule main = fx.main;
             main.startColor = TileColorManager.Instance.GetColor(ColorIndex);
         }
-        Destroy(gameObject);
+        DestroyOrReleaseToPool();
+    }
+
+    public void DestroyOrReleaseToPool()
+    {
+        if (RemoteConfig.BOOL_IS_POOLING_OPTIMAZATION_ENABLED)
+        {
+            SetObjectActiveState(false);
+            AddedBackToPool();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

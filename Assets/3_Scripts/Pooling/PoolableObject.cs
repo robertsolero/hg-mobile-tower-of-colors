@@ -3,22 +3,26 @@ using UnityEngine;
 
 public class PoolableObject : MonoBehaviour, IPoolableObject
 {
+    public Transform Parent { get; set; }
+    public bool IsDoNotDestroyOnLoad { get; set; }
     public Action<IPoolableObject> OnAddBackToPoolRequested { get; set; }
     public Action<IPoolableObject> OnRemoveFromPoolRequested { get; set; }
 
-    public void OnInstantiatedOnPool()
+    public virtual void OnInstantiatedOnPool()
     {
         SetObjectActiveState(false);
+
+        if (IsDoNotDestroyOnLoad) 
+            DontDestroyOnLoad(gameObject);
     }
 
-    public void OnRetrievedFromPool()
+    public virtual void OnRetrievedFromPool()
     {
         SetObjectActiveState(true);
     }
 
-    public void AddedBackToPool()
+    public virtual void AddedBackToPool()
     {
-        SetObjectActiveState(false);
         OnAddBackToPoolRequested?.Invoke(this);
     }
 

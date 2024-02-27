@@ -7,4 +7,6 @@
     public static float FLOAT_LEVEL_TIMER_SECONDS = 60;
     public static bool BOOL_COLOR_BLIND_ALT_ENABLED = true; 
     public static bool BOOL_PAUSE_BUTTON_ENABLED = true;
+
+    public static bool BOOL_IS_POOLING_OPTIMAZATION_ENABLED = true;
 }

@@ -48,12 +48,11 @@ public class Tower : MonoBehaviour
             for (int i = 0; i < TileCountPerFloor; i++) {
                 Quaternion direction = Quaternion.AngleAxis(angleStep * i, Vector3.up) * floorRotation;
                 Vector3 position = transform.position + Vector3.up * y * TileHeight + direction * Vector3.forward * towerRadius;
-                TowerTile tileInstance = Instantiate(Random.value > SpecialTileChance ? TilePrefab : SpecialTilePrefabs[Random.Range(0, SpecialTilePrefabs.Length)], position, direction * TilePrefab.transform.rotation, transform);
+                TowerTile tileInstance = GetFromPoolOrInstantiate(position, direction);
                 tileInstance.SetColorIndex(Mathf.FloorToInt(Random.value * TileColorManager.Instance.ColorCount));
                 tileInstance.SetFreezed(true);
                 tileInstance.Floor = y;
-                tileInstance.OnTileDestroyed += OnTileDestroyedCallback;
-                tileInstance.OnTileDestroyed += OnTileDestroyed;
+                tileInstance.Tower = this;
                 tilesByFloor[y].Add(tileInstance);
             }
             floorRotation *= Quaternion.AngleAxis(angleStep / 2.0f, Vector3.up);
@@ -66,17 +65,49 @@ public class Tower : MonoBehaviour
         }
     }
 
+    TowerTile GetFromPoolOrInstantiate(Vector3 position, Quaternion direction)
+    {
+        var isDefaultTile = Random.value > SpecialTileChance;
+        var prefab = isDefaultTile
+            ? TilePrefab
+            : SpecialTilePrefabs[Random.Range(0, SpecialTilePrefabs.Length)];
+
+        var initialRotation = direction * TilePrefab.transform.rotation;
+        
+        if (RemoteConfig.BOOL_IS_POOLING_OPTIMAZATION_ENABLED)
+        {
+            var initialCapacity = isDefaultTile ? 200 : 30;
+            var pool = Factory.Instance.GetPoolOf(prefab, true, initialCapacity);
+            var item = pool.GetFromPoolOrInstantiate();
+            item.transform.position = position;
+            item.transform.rotation = direction;
+            //item.gameObject.SetActive(true);
+            return item;
+        }
+
+        return Instantiate(prefab, position, initialRotation, transform);
+    }
+
+
     public void OnTileDestroyed(TowerTile tile)
     {
+        OnTileDestroyedCallback?.Invoke(tile);
+        
         if (maxFloor > PlayableFloors - 1 && tilesByFloor != null) {
             float checkHeight = (maxFloor - 1) * TileHeight + TileHeight * 0.9f;
             float maxHeight = 0;
             foreach (List<TowerTile> floor in tilesByFloor) {
                 foreach (TowerTile t in floor) {
                     if (t != null)
+                    {
+                        if (!t.isActiveAndEnabled)
+                            continue;
+                        
                         maxHeight = Mathf.Max(t.transform.position.y, maxHeight);
+                    }
                 }
             }
+
             if (maxHeight < checkHeight) {
                 maxFloor--;
                 if (currentFloor > 0) {
@@ -86,15 +117,31 @@ public class Tower : MonoBehaviour
         }
     }
 
+    public void UnloadPreviousLevel()
+    {
+        if (!RemoteConfig.BOOL_IS_POOLING_OPTIMAZATION_ENABLED)
+            return;
+        
+        foreach (List<TowerTile> tileList in tilesByFloor)
+        {
+            foreach (TowerTile tile in tileList) 
+                tile.AddedBackToPool();
+        }
+    }
+
     public void ResetTower()
     {
         if (tilesByFloor != null) {
             foreach (List<TowerTile> tileList in tilesByFloor) {
                 foreach (TowerTile tile in tileList) {
                     if (Application.isPlaying)
-                        Destroy(tile.gameObject);
+                    {
+                        tile.DestroyOrReleaseToPool();
+                    }
                     else
+                    {
                         DestroyImmediate(tile.gameObject);
+                    }
                 }
                 tileList.Clear();
             }
@@ -133,5 +180,4 @@ public class Tower : MonoBehaviour
             }
         }
     }
-
 }

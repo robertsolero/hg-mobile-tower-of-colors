@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class Pool<T> : IPool<T> where T : MonoBehaviour, IPoolableObject
 {
-    public Pool(T prefab, Transform parent, int initialCapacity)
+    public Pool(T prefab, bool isDoNotDestroyOnLoad, int initialCapacity)
     {
         Prefab = prefab;
-        Parent = parent;
+        IsDoNotDestroyOnLoad = isDoNotDestroyOnLoad;
         Populate(initialCapacity);
     }
 
     public T Prefab { get; set; }
-    public Transform Parent { get; set; }
+    public bool IsDoNotDestroyOnLoad { get; set; }
     public Stack<T> PoolContainer { get; set; }
     public int PoolCount => PoolContainer == null ? 0 : PoolContainer.Count;
 
@@ -30,7 +30,6 @@ public class Pool<T> : IPool<T> where T : MonoBehaviour, IPoolableObject
     public T GetFromPoolOrInstantiate()
     {
         T item;
-        
         if (PoolCount > 0)
             item = PoolContainer.Pop();
         else 
@@ -42,7 +41,8 @@ public class Pool<T> : IPool<T> where T : MonoBehaviour, IPoolableObject
 
     public T Instantiate()
     {
-        var item = Object.Instantiate(Prefab, Parent);
+        var item = Object.Instantiate(Prefab);
+        item.IsDoNotDestroyOnLoad = IsDoNotDestroyOnLoad;
         item.OnInstantiatedOnPool();
         item.OnAddBackToPoolRequested += OnAddBackToPoolRequested;
         item.OnRemoveFromPoolRequested += OnRemoveFromPoolRequested;
@@ -51,7 +51,8 @@ public class Pool<T> : IPool<T> where T : MonoBehaviour, IPoolableObject
 
     public void AddToPool(T item)
     {
-        PoolContainer?.Push(item);
+        if (!PoolContainer.Contains(item))
+            PoolContainer?.Push(item);
     }
     
     private void OnRemoveFromPoolRequested(IPoolableObject item)
