@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Submodule.Missions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -89,6 +90,14 @@ public class GameManager : Singleton<GameManager>
         percentCounter.SetValue(SaveData.PreviousHighscore);
         percentCounter.SetShadowValue(SaveData.PreviousHighscore);
         percentCounter.SetValueSmooth(0f);
+        
+        MissionManager.Instance.LogicHandler.OnMissionStarted += OnMissionStarted;
+    }
+    
+    private void OnMissionStarted(MissionProgressHandler progressHandler)
+    {
+        if (gameState == GameState.Intro)
+            SetGameState(GameState.Playing);
     }
 
     void OnBallShot()
