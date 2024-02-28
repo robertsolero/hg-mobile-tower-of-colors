@@ -33,10 +33,9 @@ namespace Submodule.Missions
 
         void CheckActiveState()
         {
-            var missionManager = MissionManager.Instance;
             var isActive = RemoteConfig.BOOL_MISSION_ENABLED &&
-                           missionManager.DataHandler.HasAnyUncompletedMission() &&
-                           missionManager.LogicHandler.IsMissionInProgress == false;
+                           MissionManager.Instance.DataHandler.HasAnyUncompletedMission() &&
+                           MissionManager.Instance.LogicHandler.IsMissionInProgress == false;
                 
             gameObject.SetActive(isActive);
         }

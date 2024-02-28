@@ -91,7 +91,8 @@ public class GameManager : Singleton<GameManager>
         percentCounter.SetShadowValue(SaveData.PreviousHighscore);
         percentCounter.SetValueSmooth(0f);
         
-        MissionManager.Instance.LogicHandler.OnMissionStarted += OnMissionStarted;
+        if (RemoteConfig.BOOL_MISSION_ENABLED)
+            MissionManager.Instance.LogicHandler.OnMissionStarted += OnMissionStarted;
     }
     
     private void OnMissionStarted(MissionProgressHandler progressHandler)
