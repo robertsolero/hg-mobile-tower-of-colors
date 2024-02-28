@@ -14,11 +14,13 @@ namespace Submodule.Missions
         {
             missionImage.sprite = missionData.MissionSprite;
             missionDescription.text = missionData.GetFormattedDescriptionBasedOnDifficulty(conditionsAtDifficulty);
-            playButton.onClick.AddListener(OnPlayButtonPressed);
+            
+            playButton.onClick.AddListener(() => OnPlayButtonPressed(missionData, conditionsAtDifficulty));
         }
 
-        private void OnPlayButtonPressed()
+        private void OnPlayButtonPressed(MissionData missionData, MissionConditionsAtDifficulty conditionsAtDifficulty)
         {
+            MissionManager.Instance.LogicHandler.StartMission(missionData, conditionsAtDifficulty);
             Close();
         }
     }

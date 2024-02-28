@@ -34,8 +34,12 @@ namespace Submodule.Missions
             missionType.text = difficultyDisplayData.DifficultyName;
             missionTypePanel.color = difficultyDisplayData.BackgroundDifficultyColor;
             missionImage.sprite = missionData.MissionSprite;
-            //button.onClick.AddListener(OnButtonPressed);
+            button.onClick.AddListener(ButtonPressed);
             
+        }
+
+        private void ButtonPressed()
+        {
             OnButtonPressed?.Invoke(_missionData, _conditionsAtDifficulty);
         }
     }

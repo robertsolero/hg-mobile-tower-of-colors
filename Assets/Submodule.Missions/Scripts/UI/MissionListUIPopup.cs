@@ -9,11 +9,6 @@ namespace Submodule.Missions
         MissionPreviewUI MissionPreviewUIPrefab;
         [SerializeField]
         Transform Container;
-        
-        public override void Show()
-        {
-            base.Show();
-        }
 
         public void Setup(List<MissionData> missions)
         {
@@ -34,11 +29,6 @@ namespace Submodule.Missions
             Close();
             var uiHandler = MissionManager.Instance.UIHandler;
             uiHandler.ShowMissionDetailsUI(missionData, conditionsAtDifficulty);
-        }
-
-        public override void Close()
-        {
-            base.Close();
         }
     }
 }

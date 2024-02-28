@@ -38,7 +38,7 @@ public class MissionManager : MonoBehaviour
     
     [SerializeField] 
     private MissionLogicHandler logicHandler;
-    public MissionLogicHandler LogicHandler => logicHandler;
+    public MissionLogicHandler LogicHandler => logicHandler == null ? logicHandler = new MissionLogicHandler() : logicHandler;
 
     
 
