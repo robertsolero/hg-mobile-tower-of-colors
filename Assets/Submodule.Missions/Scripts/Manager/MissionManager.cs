@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using Submodule.Missions;
 using UnityEngine;
 
 public class MissionManager : MonoBehaviour
@@ -9,11 +12,35 @@ public class MissionManager : MonoBehaviour
         {
             if (_instance == null)
             {
-                var go = new GameObject("Factory");
-                return _instance = go.AddComponent<MissionManager>();
+                return _instance = Resources.Load<MissionManager>("MissionManager");
             }
 
             return _instance;
         }
+    }
+
+    [SerializeField] 
+    private MissionDataHandler dataHandler;
+    public MissionDataHandler DataHandler => dataHandler;
+    
+    
+    [SerializeField] 
+    private MissionUIHandler uiHandler;
+    public MissionUIHandler UIHandler => uiHandler;
+
+    
+    [SerializeField] 
+    private MissionLogicHandler logicHandler;
+    public MissionLogicHandler LogicHandler => logicHandler;
+
+    
+
+    private void Awake()
+    {
+        if (_instance != null)
+            Destroy(gameObject);
+        
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 }

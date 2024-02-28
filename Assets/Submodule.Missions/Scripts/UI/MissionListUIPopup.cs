@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Submodule.Missions
 {
-    public class MissionsListUIPopup : MissionUIPopupBase
+    public class MissionListUIPopup : MissionUIPopupBase
     {
         [SerializeField]
         MissionPreviewUI MissionPreviewUIPrefab;
