@@ -10,13 +10,19 @@ PrefabInstance:
     - target: {fileID: 5040100013849554154, guid: 7e07854b6a92f4e809a6999fe7a0908b,
         type: 3}
       propertyPath: missionDataList.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5040100013849554154, guid: 7e07854b6a92f4e809a6999fe7a0908b,
         type: 3}
       propertyPath: missionDataList.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: c447117660ab14902b872a4a906714b1,
+        type: 2}
+    - target: {fileID: 5040100013849554154, guid: 7e07854b6a92f4e809a6999fe7a0908b,
+        type: 3}
+      propertyPath: missionDataList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9b99b5f6175104cd5beb8ac5860873e4,
         type: 2}
     - target: {fileID: 5040100013849554158, guid: 7e07854b6a92f4e809a6999fe7a0908b,
         type: 3}

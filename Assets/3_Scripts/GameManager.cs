@@ -54,10 +54,11 @@ public class GameManager : Singleton<GameManager>
     GameState gameState = GameState.Intro;
 
     public Tower Tower => tower;
-
     public static event Action<GameManager> OnNewManagerLoaded;
-    public event Action<int> OnAvailableBallAmountChanged; 
-    
+    public event Action<int> OnAvailableBallAmountChanged;
+    public event Action OnLevelWon;
+    public event Action OnLevelLost;
+
     private void Awake()
     {
         OnNewManagerLoaded?.Invoke(Instance);
@@ -106,6 +107,11 @@ public class GameManager : Singleton<GameManager>
 
     void SetGameState(GameState state)
     {
+        if (state == GameState.Win)
+            OnLevelWon?.Invoke();
+        else if (state == GameState.Lose) 
+            OnLevelLost?.Invoke();
+
         gameState = state;
         animator.SetInteger("GameState", (int)state);
     }
