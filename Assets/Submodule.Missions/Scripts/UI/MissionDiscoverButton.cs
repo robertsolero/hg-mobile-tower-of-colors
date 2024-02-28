@@ -23,7 +23,7 @@ namespace Submodule.Missions
 
         void CheckActiveState()
         {
-            gameObject.SetActive(RemoteConfig.BOOL_MISSION_ENABLED);
+            gameObject.SetActive(RemoteConfig.BOOL_MISSION_ENABLED && MissionManager.Instance.DataHandler.HasAnyUncompletedMission());
         }
     }
 }
