@@ -9,30 +9,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5b920e797924d97ab6623754536d723, type: 3}
-  m_Name: PaintItBlue
+  m_Script: {fileID: 11500000, guid: f27cb6a896bc4fd7bc242742a59658fd, type: 3}
+  m_Name: BombHunter
   m_EditorClassIdentifier: 
-  missionID: PaintItBlue
-  missionName: Paint it Blue
-  descriptionFormat: Destroy {0} blue barrels to win a prize!
-  missionSprite: {fileID: 21300000, guid: 14b93359505ff48e4861d08091428b9b, type: 3}
+  missionID: BombHunter
+  missionName: Bomb Hunter
+  descriptionFormat: Hit {0} exposive barrels to win a prize!
+  missionSprite: {fileID: 21300000, guid: 94107aab63bb7462f912eb2b6160cefa, type: 3}
   difficultyDisplayData:
   - {fileID: 11400000, guid: 19885b63367ed4c37b5f98f09a190109, type: 2}
   - {fileID: 11400000, guid: c370fd61456f441c18c46d25a93f7594, type: 2}
   - {fileID: 11400000, guid: c3415606654ad47d59fecf23f24af4bb, type: 2}
   conditionsAtDifficulty:
   - difficultyType: 0
-    missionRequirement: 90
+    missionRequirement: 12
     rewardAmount: 1
     missionReward: {fileID: 11400000, guid: 77c8244a20b794e8a8472af0ec5160eb, type: 2}
   - difficultyType: 1
-    missionRequirement: 300
+    missionRequirement: 60
     rewardAmount: 2
     missionReward: {fileID: 11400000, guid: 77c8244a20b794e8a8472af0ec5160eb, type: 2}
   - difficultyType: 2
-    missionRequirement: 800
+    missionRequirement: 100
     rewardAmount: 3
     missionReward: {fileID: 11400000, guid: 77c8244a20b794e8a8472af0ec5160eb, type: 2}
-  blueColors:
-  - {r: 0.4, g: 0.4, b: 1, a: 1}
-  - {r: 0.6, g: 0.8666667, b: 1, a: 1}
