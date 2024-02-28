@@ -2,6 +2,8 @@
 
 ## Pooling
 
+https://github.com/robertsolero/hg-mobile-tower-of-colors/assets/15109541/995cc812-7b63-4b42-81d8-7cb33ee6e184
+
 - Pooling logic is available at `Assets/3_Scripts/Pooling`
 - A Factory Singleton has also been added to keep track of Pools globally.
 - You can create or get a pool by calling `Factory.Instance.GetPoolOf` 
@@ -23,17 +25,20 @@
   
 ## UI Optimazation
 
+<img width="750" alt="Screenshot 2024-02-28 at 08 41 09" src="https://github.com/robertsolero/hg-mobile-tower-of-colors/assets/15109541/c3bfd6bb-f321-4145-b060-1aa2ce7b6879">
+
 - Even tho the UI is simple, the optimization consist in introducing `Sprite Atlases`
 - They batch multiple sprites together resulting in less draw calls. 
 
-
 ## Missions
 
-- Check readme here: TODO ADD LINK
+- Check readme here: [LINK](https://github.com/robertsolero/hg-mobile-tower-of-colors/tree/main/Assets/Submodule.Missions)
 
 ## Bonus Feature: Boosters
 
-- How doesn't like freebies?!
+https://github.com/robertsolero/hg-mobile-tower-of-colors/assets/15109541/0466ca74-efd3-4cc2-be2c-8cbb106f72c7
+
+- How doesn't like freebies?! 
 - Missions on Tower Color rewards boosters when completing a mission.
 - When a mission is completed the reward can be claimed.
 - `InventoryService` takes care of saving and retrieving userdata.
