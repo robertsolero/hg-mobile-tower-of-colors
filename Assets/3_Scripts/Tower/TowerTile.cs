@@ -35,6 +35,7 @@ public class TowerTile : PoolableObject
     private bool freezed;
 
     public Tower Tower { get; set; }
+    public MeshRenderer Renderer => renderer;
     
     protected virtual void Awake()
     {
@@ -185,7 +186,7 @@ public class TowerTile : PoolableObject
 
     public void DestroyOrReleaseToPool()
     {
-        if (RemoteConfig.BOOL_IS_POOLING_OPTIMAZATION_ENABLED)
+        if (RemoteConfig.BOOL_POOLING_OPTIMAZATION_ENABLED)
         {
             SetObjectActiveState(false);
             AddedBackToPool();

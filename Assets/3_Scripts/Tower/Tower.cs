@@ -74,14 +74,13 @@ public class Tower : MonoBehaviour
 
         var initialRotation = direction * TilePrefab.transform.rotation;
         
-        if (RemoteConfig.BOOL_IS_POOLING_OPTIMAZATION_ENABLED)
+        if (RemoteConfig.BOOL_POOLING_OPTIMAZATION_ENABLED)
         {
             var initialCapacity = isDefaultTile ? 200 : 30;
             var pool = Factory.Instance.GetPoolOf(prefab, true, initialCapacity);
             var item = pool.GetFromPoolOrInstantiate();
             item.transform.position = position;
             item.transform.rotation = direction;
-            //item.gameObject.SetActive(true);
             return item;
         }
 
@@ -119,7 +118,7 @@ public class Tower : MonoBehaviour
 
     public void UnloadPreviousLevel()
     {
-        if (!RemoteConfig.BOOL_IS_POOLING_OPTIMAZATION_ENABLED)
+        if (!RemoteConfig.BOOL_POOLING_OPTIMAZATION_ENABLED)
             return;
         
         foreach (List<TowerTile> tileList in tilesByFloor)

@@ -57,7 +57,11 @@ public class Pool<T> : IPool<T> where T : MonoBehaviour, IPoolableObject
     
     private void OnRemoveFromPoolRequested(IPoolableObject item)
     {
-        PoolContainer?.Pop();
+        if (PoolContainer == null)
+            return;
+        
+        if (PoolContainer.Contains((T)item))
+            PoolContainer.Pop();
     }
 
     private void OnAddBackToPoolRequested(IPoolableObject item)

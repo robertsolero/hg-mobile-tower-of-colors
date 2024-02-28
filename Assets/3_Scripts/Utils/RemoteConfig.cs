@@ -8,5 +8,6 @@
     public static bool BOOL_COLOR_BLIND_ALT_ENABLED = true; 
     public static bool BOOL_PAUSE_BUTTON_ENABLED = true;
 
-    public static bool BOOL_IS_POOLING_OPTIMAZATION_ENABLED = true;
+    public static bool BOOL_POOLING_OPTIMAZATION_ENABLED = true;
+    public static bool BOOL_MISSION_ENABLED = true;
 }

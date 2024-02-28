@@ -8,7 +8,7 @@ using UnityEngine.Pool;
 public class Factory : MonoBehaviour
 {
     private static Factory _instance;
-    public static Factory Instance //TODO note this is a simplified version of a Singleton.
+    public static Factory Instance //TODO improve this a simplified version of a Singleton
     {
         get
         {
