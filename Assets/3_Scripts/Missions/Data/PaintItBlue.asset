@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PaintItBlue
   m_EditorClassIdentifier: 
   missionID: PaintItBlue
-  missionName: Paint It Blue
+  missionName: Paint it Blue
   descriptionFormat: Destroy {0} blue barrels and win a prize!
   missionSprite: {fileID: 21300000, guid: 14b93359505ff48e4861d08091428b9b, type: 3}
   difficultyDisplayData:
@@ -24,6 +24,14 @@ MonoBehaviour:
   - difficultyType: 0
     missionRequirement: 80
     rewardAmount: 1
+    missionReward: {fileID: 0}
+  - difficultyType: 1
+    missionRequirement: 300
+    rewardAmount: 1
+    missionReward: {fileID: 0}
+  - difficultyType: 2
+    missionRequirement: 800
+    rewardAmount: 2
     missionReward: {fileID: 0}
   blueColors:
   - {r: 0.4, g: 0.4, b: 1, a: 1}

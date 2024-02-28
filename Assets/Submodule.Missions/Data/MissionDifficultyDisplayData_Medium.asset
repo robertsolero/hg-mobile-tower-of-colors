@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MissionDifficultyDisplayData_Medium
   m_EditorClassIdentifier: 
   difficultyType: 1
-  backgroundDifficultyColor: {r: 0.1641293, g: 0.6037736, b: 0.0085439505, a: 1}
+  backgroundDifficultyColor: {r: 1, g: 0.52685636, b: 0.0141509175, a: 1}
   difficultyName: Medium

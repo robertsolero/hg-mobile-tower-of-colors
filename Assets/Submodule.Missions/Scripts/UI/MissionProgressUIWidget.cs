@@ -15,6 +15,7 @@ namespace Submodule.Missions
         [SerializeField] Slider percentSlider;
         [SerializeField] Image fullPercentImage;
         [SerializeField] float smoothTime = 0.5f;
+        [SerializeField] private Button button;
         [SerializeField] Coroutine _animateRoutine;
 
 
@@ -29,6 +30,19 @@ namespace Submodule.Missions
             }
             
             RefreshActiveState();
+            
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(OnWidgetPressed);
+        }
+        
+        private void OnWidgetPressed()
+        {
+            var logicHandler = MissionManager.Instance.LogicHandler;
+            if (!logicHandler.IsMissionInProgress)
+                return;
+
+            MissionManager.Instance.UIHandler.ShowMissionDetailsUI(logicHandler.CurrentProgressHandler.MissionData,
+                logicHandler.CurrentProgressHandler.MissionConditionsAtDifficulty);
         }
 
 
@@ -39,6 +53,9 @@ namespace Submodule.Missions
 
         public void OnMissionProgressChanged(MissionProgressHandler missionProgress)
         {
+            if (missionProgress == null)
+                return;
+            
             var progressNormalized = missionProgress.CurrentProgress / (float)missionProgress.MissionRequirement;
             currentValueText.text = missionProgress.CurrentProgress.ToString("N0");
             SetValueSmooth(progressNormalized);
@@ -78,7 +95,7 @@ namespace Submodule.Missions
             currentValueText.text = current.ToString("N0");
             nextValueText.text = requirement.ToString("N0");
             nextValueTextFill.text = nextValueText.text;
-            SetValue(0.0f);
+            SetValue(current / (float)requirement);
         }
 
         public void SetValueSmooth(float value)

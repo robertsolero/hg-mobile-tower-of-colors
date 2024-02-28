@@ -18,12 +18,28 @@ namespace Submodule.Missions
 
         void OnButtonPressed()
         {
-            MissionManager.Instance.UIHandler.ShowMissionListUI();
+            var logicHandler = MissionManager.Instance.LogicHandler;
+            
+            if (logicHandler.IsMissionInProgress)
+            {
+                var progressHandler = logicHandler.CurrentProgressHandler; 
+                MissionManager.Instance.UIHandler.ShowMissionDetailsUI(progressHandler.MissionData, progressHandler.MissionConditionsAtDifficulty);
+            }
+            else
+            {
+                MissionManager.Instance.UIHandler.ShowMissionListUI();
+            } 
         }
 
         void CheckActiveState()
         {
-            gameObject.SetActive(RemoteConfig.BOOL_MISSION_ENABLED && MissionManager.Instance.DataHandler.HasAnyUncompletedMission());
+            if (RemoteConfig.BOOL_MISSION_ENABLED)
+            {
+                var missionManager = MissionManager.Instance;
+                var isActive = missionManager.DataHandler.HasAnyUncompletedMission() ||
+                               missionManager.LogicHandler.IsMissionInProgress;
+                gameObject.SetActive(isActive);
+            }
         }
     }
 }

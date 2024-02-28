@@ -658,9 +658,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   closeButton: {fileID: 815877431711089344}
+  missionName: {fileID: 160248459562245660}
   missionDescription: {fileID: 960483707}
   missionImage: {fileID: 2711873452160916011}
   playButton: {fileID: 2048589863}
+  playButtonText: {fileID: 1232079850}
 --- !u!1 &160248458435163638
 GameObject:
   m_ObjectHideFlags: 0
@@ -939,7 +941,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Make it Bomb!
+  m_text: Mission!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 368d74d7b67ce5249a626123ddc2eb3d, type: 2}
   m_sharedMaterial: {fileID: -1967780051679842779, guid: 368d74d7b67ce5249a626123ddc2eb3d,
@@ -1042,10 +1044,10 @@ RectTransform:
   m_Father: {fileID: 160248457519365782}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 209.7, y: 259.6}
-  m_SizeDelta: {x: 194.4749, y: 194.4749}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 31.69}
+  m_SizeDelta: {x: 194.47491, y: 194.47491}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4758331692637784331
 CanvasRenderer:
