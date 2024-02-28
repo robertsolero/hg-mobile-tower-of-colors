@@ -10,6 +10,8 @@ namespace Submodule.Missions
 
         private void Awake()
         {
+            CheckActiveState();
+            
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(OnButtonPressed);
         }
@@ -17,6 +19,11 @@ namespace Submodule.Missions
         void OnButtonPressed()
         {
             MissionManager.Instance.UIHandler.ShowMissionListUI();
+        }
+
+        void CheckActiveState()
+        {
+            gameObject.SetActive(RemoteConfig.BOOL_MISSION_ENABLED);
         }
     }
 }

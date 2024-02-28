@@ -12,6 +12,13 @@ public class MissionManager : MonoBehaviour
         {
             if (_instance == null)
             {
+                if (!RemoteConfig.BOOL_MISSION_ENABLED)
+                {
+                    Debug.LogError($"Cannot access Mission Manager, RC BOOL_MISSION_ENABLED is {RemoteConfig.BOOL_MISSION_ENABLED}");
+                    return null;
+                }
+                
+                
                 return _instance = Resources.Load<MissionManager>("MissionManager");
             }
 
@@ -37,8 +44,17 @@ public class MissionManager : MonoBehaviour
 
     private void Awake()
     {
-        if (_instance != null)
+        if (!RemoteConfig.BOOL_MISSION_ENABLED)
+        {
             Destroy(gameObject);
+            return;
+        }
+
+        if (_instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         
         _instance = this;
         DontDestroyOnLoad(gameObject);
