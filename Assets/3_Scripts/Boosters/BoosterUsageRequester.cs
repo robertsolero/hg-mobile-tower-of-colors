@@ -13,7 +13,8 @@ public class BoosterUsageRequester : MonoBehaviour
 
     public void Start()
     {
-        GameManager.Instance.OnAvailableBallAmountChanged += OnAvailableBallAmountChanged;
+        if (RemoteConfig.BOOL_BOOSTERS_ENABLED)
+            GameManager.Instance.OnAvailableBallAmountChanged += OnAvailableBallAmountChanged;
     }
     
     private void OnAvailableBallAmountChanged(int amountOfBallsAvailable)

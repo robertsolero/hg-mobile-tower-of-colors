@@ -9,5 +9,6 @@
     public static bool BOOL_PAUSE_BUTTON_ENABLED = true;
 
     public static bool BOOL_POOLING_OPTIMAZATION_ENABLED = true;
-    public static bool BOOL_MISSION_ENABLED = true;
+    public static bool BOOL_MISSION_ENABLED = false;
+    public static bool BOOL_BOOSTERS_ENABLED = false;
 }
