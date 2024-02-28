@@ -3,22 +3,21 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-[Serializable]
-public class MissionConditionsAtDifficulty
+namespace Submodule.Missions
 {
-    [SerializeField] 
-    MissionDifficultyType difficultyType;
-    public MissionDifficultyType DifficultyType => difficultyType;
-    
-    [SerializeField] 
-    int missionRequirement;
-    public int MissionRequirement => missionRequirement;
-    
-    [SerializeField] 
-    int rewardAmount;
-    public int RewardAmount => rewardAmount;
+    [Serializable]
+    public class MissionConditionsAtDifficulty
+    {
+        [SerializeField] MissionDifficultyType difficultyType;
+        public MissionDifficultyType DifficultyType => difficultyType;
 
-    [SerializeField] 
-    private MissionReward missionReward;
-    public MissionReward MissionReward => missionReward;
+        [SerializeField] int missionRequirement;
+        public int MissionRequirement => missionRequirement;
+
+        [SerializeField] int rewardAmount;
+        public int RewardAmount => rewardAmount;
+
+        [SerializeField] private MissionReward missionReward;
+        public MissionReward MissionReward => missionReward;
+    }
 }

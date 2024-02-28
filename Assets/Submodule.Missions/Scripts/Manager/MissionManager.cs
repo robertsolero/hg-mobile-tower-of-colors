@@ -3,62 +3,64 @@ using System.Collections.Generic;
 using Submodule.Missions;
 using UnityEngine;
 
-public class MissionManager : MonoBehaviour
+namespace Submodule.Missions
 {
-    private static MissionManager _instance;
-    public static MissionManager Instance //TODO improve this a simplified version of a Singleton
+    public class MissionManager : MonoBehaviour
     {
-        get
+        private static MissionManager _instance;
+
+        public static MissionManager Instance //TODO improve this a simplified version of a Singleton
         {
-            if (_instance == null)
+            get
             {
-                if (!RemoteConfig.BOOL_MISSION_ENABLED)
+                if (_instance == null)
                 {
-                    Debug.LogError($"Cannot access Mission Manager, RC BOOL_MISSION_ENABLED is {RemoteConfig.BOOL_MISSION_ENABLED}");
-                    return null;
+                    if (!RemoteConfig.BOOL_MISSION_ENABLED)
+                    {
+                        Debug.LogError(
+                            $"Cannot access Mission Manager, RC BOOL_MISSION_ENABLED is {RemoteConfig.BOOL_MISSION_ENABLED}");
+                        return null;
+                    }
+
+
+                    return _instance = FindObjectOfType<MissionManager>();
                 }
 
+                return _instance;
+            }
+        }
 
-                return _instance = FindObjectOfType<MissionManager>();
+        [SerializeField] private MissionDataHandler dataHandler;
+        public MissionDataHandler DataHandler => dataHandler;
+
+
+        [SerializeField] private MissionUIHandler uiHandler;
+        public MissionUIHandler UIHandler => uiHandler;
+
+
+        [SerializeField] private MissionLogicHandler logicHandler;
+        public MissionLogicHandler LogicHandler => logicHandler == null ? logicHandler = new MissionLogicHandler() : logicHandler;
+
+
+
+        private void Awake()
+        {
+            if (!RemoteConfig.BOOL_MISSION_ENABLED)
+            {
+                Destroy(gameObject);
+                return;
             }
 
-            return _instance;
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+
+            UIHandler.Initialize();
         }
-    }
-
-    [SerializeField] 
-    private MissionDataHandler dataHandler;
-    public MissionDataHandler DataHandler => dataHandler;
-    
-    
-    [SerializeField] 
-    private MissionUIHandler uiHandler;
-    public MissionUIHandler UIHandler => uiHandler;
-
-    
-    [SerializeField] 
-    private MissionLogicHandler logicHandler;
-    public MissionLogicHandler LogicHandler => logicHandler == null ? logicHandler = new MissionLogicHandler() : logicHandler;
-
-    
-
-    private void Awake()
-    {
-        if (!RemoteConfig.BOOL_MISSION_ENABLED)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        
-        _instance = this;
-        DontDestroyOnLoad(gameObject);
-        
-        UIHandler.Initialize();
     }
 }

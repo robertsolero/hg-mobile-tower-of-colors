@@ -1,4 +1,4 @@
-
+using Submodule.Missions;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "BoosterMissionReward", menuName = "Missions/BoosterMissionReward", order = 1)]
