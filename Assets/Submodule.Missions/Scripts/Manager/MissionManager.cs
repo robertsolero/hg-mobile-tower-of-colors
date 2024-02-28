@@ -9,7 +9,7 @@ namespace Submodule.Missions
     {
         private static MissionManager _instance;
 
-        public static MissionManager Instance //TODO improve this a simplified version of a Singleton
+        public static MissionManager Instance
         {
             get
             {
@@ -17,13 +17,15 @@ namespace Submodule.Missions
                 {
                     if (!RemoteConfig.BOOL_MISSION_ENABLED)
                     {
-                        Debug.LogError(
-                            $"Cannot access Mission Manager, RC BOOL_MISSION_ENABLED is {RemoteConfig.BOOL_MISSION_ENABLED}");
+                        Debug.LogError($"Mission Manager, RC BOOL_MISSION_ENABLED is {RemoteConfig.BOOL_MISSION_ENABLED}");
                         return null;
                     }
 
+                    _instance = FindObjectOfType<MissionManager>();
+                    if (_instance == null)
+                        Debug.LogError("Mission Manager is required on scene");
 
-                    return _instance = FindObjectOfType<MissionManager>();
+                    return _instance;
                 }
 
                 return _instance;
