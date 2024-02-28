@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missionID: BombHunter
   missionName: Bomb Hunter
-  descriptionFormat: Hit {0} exposive barrels to win a prize!
+  descriptionFormat: Clear {0} exposive barrels to win a prize!
   missionSprite: {fileID: 21300000, guid: 94107aab63bb7462f912eb2b6160cefa, type: 3}
   difficultyDisplayData:
   - {fileID: 11400000, guid: 19885b63367ed4c37b5f98f09a190109, type: 2}

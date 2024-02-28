@@ -15,10 +15,6 @@ namespace Submodule.Missions
         MissionProgressUIWidget missionsWidgetPrefab;
         [SerializeField]
         MissionCompletedPopup missionCompletedPopupPrefab;
-
-
-        [SerializeField]
-        private string uiParentScenePath = "GameManager/UI";
         
         private Transform uiParent;
         private Transform UIParent
@@ -27,12 +23,13 @@ namespace Submodule.Missions
             {
                 if (uiParent != null)
                     return uiParent;
+                
+                uiParent = FindObjectOfType<MissionUIPopupParentTarget>().transform;
+                if (uiParent == null)
+                    Debug.LogError("Mission Submodule UIs require a transform for UI to be spawned." +
+                                   "Add MissionUIPopupParentTarget component to one UI GameObject on your scene.");
 
-                var canvasObject = GameObject.Find(uiParentScenePath); // ugly, because of the scene reload structure. 
-                if (canvasObject == null)
-                    Debug.LogError("Missions submodule Requires a Canvas");
-
-                return canvasObject == null ? null : uiParent = canvasObject.transform;
+                return uiParent;
             }
         }
 
