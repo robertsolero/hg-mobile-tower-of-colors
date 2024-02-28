@@ -2,7 +2,7 @@
 
 ## Pooling
 
-- Pooling logics are available at `Assets/3_Scripts/Pooling`
+- Pooling logic is available at `Assets/3_Scripts/Pooling`
 - A Factory Singleton has also been added to keep track of Pools globally.
 - You can create or get a pool by calling `Factory.Instance.GetPoolOf` 
   - if a pool for that type is available, that is returned, otherwise a new pool instance is created for you.
@@ -18,8 +18,8 @@
   - `TowerTile`:
     - Now inherits from `PoolableObject`
     - Uses `DestroyOrReleaseToPool()` instead of Destroy directly.
-    - Overrides base class methods to initialize certain states with 
-
+    - Overrides base class methods to initialize certain states with
+- use `RemoteConfig.BOOL_POOLING_OPTIMAZATION_ENABLED` to enabled and disable it.
   
 ## UI Optimazation
 
@@ -28,3 +28,16 @@
 
 
 ## Missions
+
+- Check readme here: TODO ADD LINK
+
+## Bonus Feature: Boosters
+
+- How doesn't like freebies?!
+- Missions on Tower Color rewards boosters when completing a mission.
+- When a mission is completed the reward can be claimed.
+- `InventoryService` takes care of saving and retrieving userdata.
+- The implemented example booster is `MoreBallsBooster` and can be found at `Assets/3_Scripts/Boosters/Datatype/MoreBallsBooster.cs`
+- When the user is left with one ball, if the inventory has `MoreBallsBooster` a popup is presented for the user to choose for its usage.
+- Users can dismiss or accept the offers, 5 more balls are provided and the inventory is updated.
+- use `RemoteConfig.BOOL_BOOSTERS_ENABLED` to enabled and disable it.

@@ -130,8 +130,6 @@ public class Tower : MonoBehaviour
             foreach (TowerTile tile in tileList) 
                 tile.DestroyOrReleaseToPool();
         }
-
-        //EditorApplication.isPaused = true;
     }
 
     public void ResetTower()
