@@ -33,13 +33,12 @@ namespace Submodule.Missions
 
         void CheckActiveState()
         {
-            if (RemoteConfig.BOOL_MISSION_ENABLED)
-            {
-                var missionManager = MissionManager.Instance;
-                var isActive = missionManager.DataHandler.HasAnyUncompletedMission() ||
-                               missionManager.LogicHandler.IsMissionInProgress;
-                gameObject.SetActive(isActive);
-            }
+            var missionManager = MissionManager.Instance;
+            var isActive = RemoteConfig.BOOL_MISSION_ENABLED &&
+                           missionManager.DataHandler.HasAnyUncompletedMission() &&
+                           missionManager.LogicHandler.IsMissionInProgress == false;
+                
+            gameObject.SetActive(isActive);
         }
     }
 }
