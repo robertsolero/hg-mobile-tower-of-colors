@@ -44,31 +44,21 @@ SpriteAtlas:
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
-    - {fileID: 102900000, guid: e56e102e7c4e6364cb35ef048ea8b1ae, type: 3}
+    - {fileID: 102900000, guid: 8d5cb657f8ac240a2bfc06737489c524, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: 5b17af609693e5043909a39af2562f45, type: 3}
-  - {fileID: 21300000, guid: fc9461647ccfcb74599894fa38cae5e0, type: 3}
-  - {fileID: 21300000, guid: 40ee5035ca44d29499587ae873ccf91f, type: 3}
-  - {fileID: 21300000, guid: 805c952828626d6429228839b8197da2, type: 3}
-  - {fileID: 21300000, guid: ce59c0fb95280884bb5755db6b9ac64c, type: 3}
-  - {fileID: 21300000, guid: 3db1cd9c099ac0141969487ca105dbe0, type: 3}
-  - {fileID: 21300000, guid: 1881d50d27ba1e84280ec37f3675c0af, type: 3}
-  - {fileID: 21300000, guid: 8eff7f7ddab8e044495d9ef57d8e388c, type: 3}
-  - {fileID: 21300000, guid: 61ecdded871dc5c4b9de3ce27684988f, type: 3}
+  - {fileID: 21300000, guid: fc8ee3f36bb4544b9b10206e404da87e, type: 3}
+  - {fileID: 21300000, guid: e42e5e1622d884cbfa49f87baf1f661e, type: 3}
+  - {fileID: 21300000, guid: c17f3277158ff4102b3d979ab744f2a1, type: 3}
+  - {fileID: 21300000, guid: 9a71bd5d4af714761859dbe94d7d0f65, type: 3}
   m_PackedSpriteNamesToIndex:
-  - slider-border
-  - eye-open
-  - slider-handle
-  - smartphone-vibration
-  - eye-close
-  - settings
-  - smartphone
-  - slider-fill
-  - fill-circle
+  - slider-handle-mission
+  - slider-fill-mission
+  - panel-rounded-edges
+  - slider-border-mission
   m_RenderDataMap: {}
   m_Tag: _UI-sprite-atlas
   m_IsVariant: 0
