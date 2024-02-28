@@ -13,7 +13,9 @@ namespace Submodule.Missions
         MissionDetailsUIPopup missionsDetailsUIPopupPrefab;
         [SerializeField]
         MissionProgressUIWidget missionsWidgetPrefab;
-        
+        [SerializeField]
+        MissionCompletedPopup missionCompletedPopupPrefab;
+
 
         [SerializeField]
         private string uiParentScenePath = "GameManager/UI";
@@ -66,6 +68,8 @@ namespace Submodule.Missions
         {
             if (_widget)
                 _widget.OnMissionCompleted();
+
+            ShowMissionCompletedUI();
         }
 
         
@@ -80,6 +84,15 @@ namespace Submodule.Missions
         public void ShowMissionDetailsUI(MissionData missionData, MissionConditionsAtDifficulty missionConditionsAtDifficulty)
         {
             var ui = Instantiate(missionsDetailsUIPopupPrefab, UIParent);
+            ui.Setup(missionData, missionConditionsAtDifficulty);
+            ui.Show();
+        }
+        
+        public void ShowMissionCompletedUI()
+        {
+            var missionData = MissionManager.Instance.LogicHandler.CurrentProgressHandler.MissionData;
+            var missionConditionsAtDifficulty = MissionManager.Instance.LogicHandler.CurrentProgressHandler.MissionConditionsAtDifficulty;
+            var ui = Instantiate(missionCompletedPopupPrefab, UIParent);
             ui.Setup(missionData, missionConditionsAtDifficulty);
             ui.Show();
         }

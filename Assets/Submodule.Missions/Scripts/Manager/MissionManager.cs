@@ -20,7 +20,6 @@ public class MissionManager : MonoBehaviour
 
 
                 return _instance = FindObjectOfType<MissionManager>();
-                //return _instance = Resources.Load<MissionManager>("MissionManager");
             }
 
             return _instance;

@@ -5,12 +5,16 @@ public abstract class BoosterData : ScriptableObject, IInventoriable
 {
     [SerializeField] BoosterType boosterType;
     public BoosterType BoosterType => boosterType;
+    
+    [SerializeField] private string boosterName;
+    public string BoosterName => boosterName;
 
-    [SerializeField] private Image boosterImage;
-    public Image BoosterImage => boosterImage;
+
+    [SerializeField] private Sprite boosterImage;
+    public Sprite BoosterImage => boosterImage;
 
     public abstract void PerformBoosterAction();
-    
+    public abstract string Description { get; } 
     public string ID => BoosterType.ToString();
     public string UserdataInventoryKey => $"Boosters.{ID}";
 

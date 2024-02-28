@@ -55,7 +55,8 @@ public class GameManager : Singleton<GameManager>
 
     public Tower Tower => tower;
 
-    public static event Action<GameManager> OnNewManagerLoaded; 
+    public static event Action<GameManager> OnNewManagerLoaded;
+    public event Action<int> OnAvailableBallAmountChanged; 
     
     private void Awake()
     {
@@ -92,6 +93,7 @@ public class GameManager : Singleton<GameManager>
     void OnBallShot()
     {
         ballCount--;
+        OnAvailableBallAmountChanged?.Invoke(ballCount);
         ballCountText.text = ballCount.ToString("N0");
         if (ballCount == 1) {
             oneBallRemaining.Play();
@@ -125,6 +127,15 @@ public class GameManager : Singleton<GameManager>
                     Handheld.Vibrate();
             }
         }
+    }
+
+    public void IncreaseAvailableBallAmount(int increaseAmount)
+    {
+        ballCount = increaseAmount;
+        ballCountText.text = ballCount.ToString("N0");
+        
+        if (oneBallRemaining.isPlaying && ballCount > 1)
+            oneBallRemaining.Stop();
     }
 
     public void StartGame()

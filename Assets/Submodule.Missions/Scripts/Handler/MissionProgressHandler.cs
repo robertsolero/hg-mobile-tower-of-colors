@@ -20,15 +20,15 @@ namespace Submodule.Missions
 
         protected void UpdateProgress(int newProgress)
         {
+            if (IsCompleted)
+                return;
+            
             CurrentProgress = newProgress;
             CurrentProgress = Mathf.Clamp(CurrentProgress, 0, MissionRequirement);
             
             if (!IsCompleted)
                 ProgressChanged();
-            
-            Debug.Log($"Mission Progress on {MissionData.MissionID} is {CurrentProgress}/{MissionRequirement}");
-            
-            if (IsCompleted)
+            else 
                 SetAsCompleted();
         }
 

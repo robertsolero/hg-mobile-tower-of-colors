@@ -7,12 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5040100013849554153, guid: 7e07854b6a92f4e809a6999fe7a0908b,
-        type: 3}
-      propertyPath: missionsWidgetPrefab
-      value: 
-      objectReference: {fileID: 1693666598100331474, guid: dab2b6de4eb6649ed9f344b686b614fb,
-        type: 3}
     - target: {fileID: 5040100013849554154, guid: 7e07854b6a92f4e809a6999fe7a0908b,
         type: 3}
       propertyPath: missionDataList.Array.size

@@ -22,17 +22,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c3415606654ad47d59fecf23f24af4bb, type: 2}
   conditionsAtDifficulty:
   - difficultyType: 0
-    missionRequirement: 80
+    missionRequirement: 10
     rewardAmount: 1
-    missionReward: {fileID: 0}
+    missionReward: {fileID: 11400000, guid: 77c8244a20b794e8a8472af0ec5160eb, type: 2}
   - difficultyType: 1
     missionRequirement: 300
-    rewardAmount: 1
-    missionReward: {fileID: 0}
+    rewardAmount: 2
+    missionReward: {fileID: 11400000, guid: 77c8244a20b794e8a8472af0ec5160eb, type: 2}
   - difficultyType: 2
     missionRequirement: 800
-    rewardAmount: 2
-    missionReward: {fileID: 0}
+    rewardAmount: 3
+    missionReward: {fileID: 11400000, guid: 77c8244a20b794e8a8472af0ec5160eb, type: 2}
   blueColors:
   - {r: 0.4, g: 0.4, b: 1, a: 1}
   - {r: 0.6, g: 0.8666667, b: 1, a: 1}

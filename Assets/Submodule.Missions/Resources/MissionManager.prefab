@@ -77,4 +77,8 @@ MonoBehaviour:
     type: 3}
   missionsDetailsUIPopupPrefab: {fileID: 5485797044706053472, guid: 1dc97cac3ddbd436ebb64bab38bc13c5,
     type: 3}
-  uiParent: {fileID: 0}
+  missionsWidgetPrefab: {fileID: 1693666598100331474, guid: dab2b6de4eb6649ed9f344b686b614fb,
+    type: 3}
+  missionCompletedPopupPrefab: {fileID: 1361754350, guid: 5259005ffb97d444387a27d9bfbd7478,
+    type: 3}
+  uiParentScenePath: GameManager/UI

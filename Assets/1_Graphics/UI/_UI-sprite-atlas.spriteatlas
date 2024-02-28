@@ -53,6 +53,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 5b17af609693e5043909a39af2562f45, type: 3}
   - {fileID: 21300000, guid: fc9461647ccfcb74599894fa38cae5e0, type: 3}
   - {fileID: 21300000, guid: 40ee5035ca44d29499587ae873ccf91f, type: 3}
+  - {fileID: 21300000, guid: df8dfc36396714eeab58cdab107f0e85, type: 3}
   - {fileID: 21300000, guid: 805c952828626d6429228839b8197da2, type: 3}
   - {fileID: 21300000, guid: ce59c0fb95280884bb5755db6b9ac64c, type: 3}
   - {fileID: 21300000, guid: 3db1cd9c099ac0141969487ca105dbe0, type: 3}
@@ -63,6 +64,7 @@ SpriteAtlas:
   - slider-border
   - eye-open
   - slider-handle
+  - booster-5-balls-try-again
   - smartphone-vibration
   - eye-close
   - settings

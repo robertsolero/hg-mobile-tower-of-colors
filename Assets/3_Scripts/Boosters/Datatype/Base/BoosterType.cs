@@ -1,4 +1,4 @@
 public enum BoosterType
 {
-    RetryMoreBalls = 0
+    MoreBalls = 0
 }
