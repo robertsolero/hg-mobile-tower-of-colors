@@ -32,6 +32,8 @@ https://github.com/robertsolero/hg-mobile-tower-of-colors/assets/15109541/995cc8
 
 ## Missions
 
+https://github.com/robertsolero/hg-mobile-tower-of-colors/assets/15109541/0107320e-117f-42de-83ac-5d4921a0dc96
+
 - Check in depth README with instruction and comments here: [LINK](https://github.com/robertsolero/hg-mobile-tower-of-colors/tree/main/Assets/Submodule.Missions)
 
 ## Bonus Feature: Boosters
