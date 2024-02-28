@@ -45,6 +45,7 @@ namespace Submodule.Missions
             MissionManager.Instance.LogicHandler.OnMissionStarted += OnMissionStarted;
             MissionManager.Instance.LogicHandler.OnMissionProgressChanged += OnMissionProgressChanged;
             MissionManager.Instance.LogicHandler.OnMissionCompleted += OnMissionCompleted;
+            MissionManager.Instance.LogicHandler.OnMissionDisposed += OnMissionDisposed;
         }
 
         void TrySpawnWidget()
@@ -70,6 +71,11 @@ namespace Submodule.Missions
                 _widget.OnMissionCompleted();
 
             ShowMissionCompletedUI();
+        }
+        private void OnMissionDisposed()
+        {
+            if (_widget)
+                _widget.OnMissionDisposed();
         }
 
         

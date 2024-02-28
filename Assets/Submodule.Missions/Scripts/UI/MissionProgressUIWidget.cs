@@ -64,9 +64,12 @@ namespace Submodule.Missions
         public void OnMissionCompleted()
         {
             currentValueText.text = nextValueText.text;
-            percentSlider.normalizedValue = 1.0f;
-            fullPercentImage.gameObject.SetActive(true);
-            gameObject.SetActive(false);
+            SetValueSmooth(1.0f);
+        }
+
+        public void OnMissionDisposed()
+        {
+            RefreshActiveState();
         }
 
         void RefreshActiveState(MissionProgressHandler missionProgress = null)

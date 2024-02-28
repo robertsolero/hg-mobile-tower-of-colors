@@ -13,6 +13,8 @@ namespace Submodule.Missions
         public Action OnMissionCompleted;
         
         public Action<MissionProgressHandler> OnMissionStarted;
+
+        public Action OnMissionDisposed;
         
         public void StartMission(MissionData missionData, MissionConditionsAtDifficulty missionConditionsAtDifficulty)
         {
@@ -39,6 +41,7 @@ namespace Submodule.Missions
         public void ResetLastMissionCompleted()
         {
             CurrentProgressHandler = null;
+            OnMissionDisposed?.Invoke();
         }
     }
 }
