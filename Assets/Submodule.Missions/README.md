@@ -2,6 +2,8 @@
 
 ## About
 
+https://github.com/robertsolero/hg-mobile-tower-of-colors/assets/15109541/0107320e-117f-42de-83ac-5d4921a0dc96
+
 - Mission is a modular and extendable submodule to create missions in games.
 - The logic works in parallel to the main track of the game.
 - On the main menu, if a mission is available, the button is presented.
@@ -13,6 +15,7 @@
 - Users can press it and check the details of the missions again.
 - If the requirement is completed, a popup is presented to the users with the reward.
 - Tower of colors now rewards users with a boosters when they complete a mission.
+- Missions have different level of difficulty. When you complete the Easy level, you can access Medium and then Hard. Complex mission rewards more boosers.
 - use `RemoteConfig.BOOL_MISSION_ENABLED` to enabled and disable it.
 
 
