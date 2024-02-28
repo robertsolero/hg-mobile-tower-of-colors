@@ -25,7 +25,7 @@ https://github.com/robertsolero/hg-mobile-tower-of-colors/assets/15109541/995cc8
   
 ## UI Optimazation
 
-<img width="750" alt="Screenshot 2024-02-28 at 08 41 09" src="https://github.com/robertsolero/hg-mobile-tower-of-colors/assets/15109541/c3bfd6bb-f321-4145-b060-1aa2ce7b6879">
+<img width="550" alt="Screenshot 2024-02-28 at 08 41 09" src="https://github.com/robertsolero/hg-mobile-tower-of-colors/assets/15109541/c3bfd6bb-f321-4145-b060-1aa2ce7b6879">
 
 - Even tho the UI is simple, the optimization consist in introducing `Sprite Atlases`
 - They batch multiple sprites together resulting in less draw calls. 
