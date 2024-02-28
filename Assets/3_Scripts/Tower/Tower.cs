@@ -80,7 +80,7 @@ public class Tower : MonoBehaviour
             var pool = Factory.Instance.GetPoolOf(prefab, true, initialCapacity);
             var item = pool.GetFromPoolOrInstantiate();
             item.transform.position = position;
-            item.transform.rotation = direction;
+            item.transform.rotation = initialRotation;
             return item;
         }
 
