@@ -11,8 +11,8 @@ public class MissionConditionsAtDifficulty
     public MissionDifficultyType DifficultyType => difficultyType;
     
     [SerializeField] 
-    Vector2Int minMaxMissionThreshold;
-    public int GetMissionThreshold => Random.Range(minMaxMissionThreshold.x, minMaxMissionThreshold.y);
+    int missionRequirement;
+    public int MissionRequirement => missionRequirement;
     
     [SerializeField] 
     int rewardAmount;

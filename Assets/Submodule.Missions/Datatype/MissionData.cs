@@ -1,9 +1,12 @@
 using System.Collections.Generic;
+using Submodule.Missions;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-[CreateAssetMenu(fileName = "Mission", menuName = "Missions/MissionData", order = 1)]
-public class MissionData : ScriptableObject
+public abstract class MissionData : ScriptableObject
 {
+    public abstract MissionProgressHandler CreateMissionProgressHandler(MissionData missionData, MissionConditionsAtDifficulty missionConditionsAtDifficulty);
+    
     [SerializeField]
     string missionID;
     public string MissionID => missionID;
@@ -14,35 +17,62 @@ public class MissionData : ScriptableObject
         
     [SerializeField]
     string descriptionFormat;
-    public string DescriptionFormatFormat => descriptionFormat;
+    public string GetFormattedDescriptionBasedOnDifficulty(MissionConditionsAtDifficulty conditionAtDifficulty)
+    {
+        return string.Format(descriptionFormat, conditionAtDifficulty.MissionRequirement);
+    }
     
     [SerializeField]
     Sprite missionSprite;
     public Sprite MissionSprite => missionSprite;
 
-    [SerializeField]
-    private List<MissionConditionsAtDifficulty> thresholdAtDifficulty = new List<MissionConditionsAtDifficulty>();
+    [SerializeField] 
+    private List<MissionDifficultyDisplayData> difficultyDisplayData = new List<MissionDifficultyDisplayData>();
+    private List<MissionDifficultyDisplayData> DifficultyDisplayData => difficultyDisplayData;
 
-    public List<MissionConditionsAtDifficulty> ThresholdAtDifficulty => thresholdAtDifficulty;
+    public MissionDifficultyDisplayData GetDisplayDataOfDefault(MissionDifficultyType difficultyType)
+    {
+        var foundDisplayData = DifficultyDisplayData.Find(displayData => displayData.DifficultyType == difficultyType);
+        return foundDisplayData != null ? foundDisplayData : null;
+    }
+
+    
+    [SerializeField]
+    private List<MissionConditionsAtDifficulty> conditionsAtDifficulty = new List<MissionConditionsAtDifficulty>();
+    public List<MissionConditionsAtDifficulty> ConditionsAtDifficulty => conditionsAtDifficulty;
 
     private string CompletedMissionUserdataKey => "Mission.{0}.{1}.Completed";
-
-    public bool TryGetNextUncompletedMissionType(out MissionDifficultyType type)
+    
+    public bool TryGetMissionConditionsOfType(MissionDifficultyType type, out MissionConditionsAtDifficulty conditions)
     {
-        type = MissionDifficultyType.Easy;
-        var found = false;
+        conditions = null;
         
-        foreach (var difficulty in thresholdAtDifficulty)
+        foreach (var difficulty in conditionsAtDifficulty)
         {
-            if (!IsMissionAtDifficultyLevelCompleted(difficulty.DifficultyType))
+            if (difficulty.DifficultyType == type)
             {
-                type = difficulty.DifficultyType;
-                found = true;
+                conditions = difficulty;
                 break;
             }
         }
 
-        return found;
+        return conditions != null;
+    }
+    
+    public bool TryGetNextUncompletedMissionConditions(out MissionConditionsAtDifficulty conditions)
+    {
+        conditions = null;
+        
+        foreach (var difficulty in conditionsAtDifficulty)
+        {
+            if (!IsMissionAtDifficultyLevelCompleted(difficulty.DifficultyType))
+            {
+                conditions = difficulty;
+                break;
+            }
+        }
+
+        return conditions != null;
     }
     
     
@@ -52,9 +82,9 @@ public class MissionData : ScriptableObject
         return PlayerPrefs.GetInt(key) == 1;
     }
     
-    public void SetMissionAtDifficultyLevelCompleted(MissionDifficultyType type)
+    public void SetMissionAtDifficultyLevelCompleted(MissionConditionsAtDifficulty conditions)
     {
-        var key = string.Format(CompletedMissionUserdataKey, MissionID, type.ToString());
+        var key = string.Format(CompletedMissionUserdataKey, MissionID, conditions.DifficultyType.ToString());
         PlayerPrefs.SetInt(key,1);
     } 
 }
