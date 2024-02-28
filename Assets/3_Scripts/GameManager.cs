@@ -159,10 +159,4 @@ public class GameManager : Singleton<GameManager>
         SetGameState(GameState.Playing);
         tower.StartGame();
     }
-
-    public void UnloadPreviousLevel()
-    {
-        if (tower != null)
-            tower.UnloadPreviousLevel();
-    }
 }

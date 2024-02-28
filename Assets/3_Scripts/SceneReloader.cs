@@ -9,7 +9,6 @@ public class SceneReloader : MonoBehaviour
 
     IEnumerator Start()
     {
-        GameManager.Instance.UnloadPreviousLevel();
         AsyncOperation loadOp = SceneManager.LoadSceneAsync("GameScene");
         loadOp.allowSceneActivation = false;
         while(!AllowChange || loadOp.progress < 0.9f)

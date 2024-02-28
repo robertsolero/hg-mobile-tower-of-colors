@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Tower : MonoBehaviour
 {
@@ -29,6 +31,8 @@ public class Tower : MonoBehaviour
         if (BuildOnStart) {
             BuildTower();
         }
+        
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
     }
 
     public float CaculateTowerRadius(float sideLength, float sideCount)
@@ -115,8 +119,8 @@ public class Tower : MonoBehaviour
             }
         }
     }
-
-    public void UnloadPreviousLevel()
+    
+    private void OnSceneUnloaded(Scene arg0)
     {
         if (!RemoteConfig.BOOL_POOLING_OPTIMAZATION_ENABLED)
             return;
@@ -124,8 +128,10 @@ public class Tower : MonoBehaviour
         foreach (List<TowerTile> tileList in tilesByFloor)
         {
             foreach (TowerTile tile in tileList) 
-                tile.AddedBackToPool();
+                tile.DestroyOrReleaseToPool();
         }
+
+        //EditorApplication.isPaused = true;
     }
 
     public void ResetTower()
