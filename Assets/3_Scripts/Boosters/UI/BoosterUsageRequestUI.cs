@@ -36,6 +36,7 @@ public class BoosterUsageRequestUI : MonoBehaviour
     void OnClosePressed(Action<bool> onComplete)
     {
         onComplete?.Invoke(false);
+        Close();
     }
     
     void Close()

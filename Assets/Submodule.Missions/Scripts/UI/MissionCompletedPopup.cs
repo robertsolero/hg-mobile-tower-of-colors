@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -26,8 +27,12 @@ namespace Submodule.Missions
 
         private void OnClaimButtonPressed()
         {
-            MissionManager.Instance.LogicHandler.ResetLastMissionCompleted();
             Close();
+        }
+
+        private void OnDestroy()
+        {
+            MissionManager.Instance.LogicHandler.ResetLastMissionCompleted();
         }
     }
 }

@@ -40,6 +40,9 @@ namespace Submodule.Missions
         
         public void ResetLastMissionCompleted()
         {
+            if (CurrentProgressHandler == null)
+                return;
+            
             CurrentProgressHandler = null;
             OnMissionDisposed?.Invoke();
         }
