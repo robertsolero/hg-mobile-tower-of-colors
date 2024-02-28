@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 enum GameState
 {
@@ -51,8 +53,13 @@ public class GameManager : Singleton<GameManager>
     int ballCount;
     GameState gameState = GameState.Intro;
 
+    public Tower Tower => tower;
+
+    public static event Action<GameManager> OnNewManagerLoaded; 
+    
     private void Awake()
     {
+        OnNewManagerLoaded?.Invoke(Instance);
         Application.targetFrameRate = 60;
         animator = GetComponent<Animator>();
         animator.speed = 1.0f / Time.timeScale;

@@ -8,9 +8,11 @@ namespace Submodule.Missions
         public bool IsMissionInProgress => CurrentProgressHandler != null;
         public MissionProgressHandler CurrentProgressHandler { get; private set; }
         
-        public Action<int, int> OnMissionProgressChanged; // CurrentProgress, MissionRequirement
+        public Action<MissionProgressHandler> OnMissionProgressChanged; // CurrentProgress, MissionRequirement
 
         public Action OnMissionCompleted;
+        
+        public Action<MissionProgressHandler> OnMissionStarted;
 
         public void StartMission(MissionData missionData, MissionConditionsAtDifficulty missionConditionsAtDifficulty)
         {
@@ -24,9 +26,15 @@ namespace Submodule.Missions
             
             CurrentProgressHandler = missionData.CreateMissionProgressHandler(missionData, missionConditionsAtDifficulty);
             CurrentProgressHandler.Start();
-            CurrentProgressHandler.OnCompleted += OnCurrentMissionCompleted;
             CurrentProgressHandler.OnCompleted += OnMissionCompleted;
-            CurrentProgressHandler.OnProgressChanged += OnMissionProgressChanged;
+            CurrentProgressHandler.OnCompleted += OnCurrentMissionCompleted;
+            CurrentProgressHandler.OnProgressChanged += OnProgressChanged;
+            OnMissionStarted?.Invoke(CurrentProgressHandler);
+        }
+
+        private void OnProgressChanged(int currentValue, int requiredValue)
+        {
+            OnMissionProgressChanged?.Invoke(CurrentProgressHandler);
         }
 
         private void OnCurrentMissionCompleted()

@@ -7,7 +7,7 @@ namespace Submodule.Missions
     {
         protected MissionData _missionData;
         protected MissionConditionsAtDifficulty _missionConditionsAtDifficulty;
-        protected int CurrentProgress;
+        public int CurrentProgress { get; protected set; }
         public virtual int MissionRequirement => _missionConditionsAtDifficulty.MissionRequirement;
 
         public MissionProgressHandler(MissionData missionData, MissionConditionsAtDifficulty missionConditionsAtDifficulty)
