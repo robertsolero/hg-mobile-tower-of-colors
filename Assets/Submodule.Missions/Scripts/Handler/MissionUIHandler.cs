@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 namespace Submodule.Missions
@@ -9,6 +11,9 @@ namespace Submodule.Missions
         MissionListUIPopup missionListUIPopupPrefab;
         [SerializeField] 
         MissionDetailsUIPopup missionsDetailsUIPopupPrefab;
+        [SerializeField]
+        MissionProgressUIWidget missionsWidgetPrefab;
+        
 
         [SerializeField]
         private string uiParentScenePath = "GameManager/UI";
@@ -29,6 +34,41 @@ namespace Submodule.Missions
             }
         }
 
+        private MissionProgressUIWidget _widget;
+
+        public void Initialize()
+        {
+            SceneManager.sceneLoaded += (scene, mode) => TrySpawnWidget();
+            
+            MissionManager.Instance.LogicHandler.OnMissionStarted += OnMissionStarted;
+            MissionManager.Instance.LogicHandler.OnMissionProgressChanged += OnMissionProgressChanged;
+            MissionManager.Instance.LogicHandler.OnMissionCompleted += OnMissionCompleted;
+        }
+
+        void TrySpawnWidget()
+        {
+            _widget = Instantiate(missionsWidgetPrefab, UIParent);
+        }
+        
+        private void OnMissionStarted(MissionProgressHandler progressHandler)
+        {
+            if (_widget)
+                _widget.OnMissionStarted(progressHandler);
+        }
+
+        private void OnMissionProgressChanged(MissionProgressHandler progressHandler)
+        {
+            if (_widget)
+                _widget.OnMissionProgressChanged(progressHandler);
+        }
+
+        private void OnMissionCompleted()
+        {
+            if (_widget)
+                _widget.OnMissionCompleted();
+        }
+
+        
 
         public void ShowMissionListUI()
         {

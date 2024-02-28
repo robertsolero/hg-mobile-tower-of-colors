@@ -24,13 +24,13 @@ public class PaintItBlueMissionProgressHandler : MissionProgressHandler
 
     private void OnTileDestroyed(TowerTile tile)
     {
-        Debug.Log($"Mission {_missionData.MissionID} OnTileDestroyed");
+        Debug.Log($"Mission {MissionData.MissionID} OnTileDestroyed");
         
         var mat = tile.Renderer.sharedMaterial;
-        var mission = _missionData as PaintItBlueMissionData;
+        var mission = MissionData as PaintItBlueMissionData;
         if (mission == null)
         {
-            Debug.LogError($"Expected mission of type PaintItBlueMissionData on {_missionData.MissionID}");
+            Debug.LogError($"Expected mission of type PaintItBlueMissionData on {MissionData.MissionID}");
             return;
         }
 

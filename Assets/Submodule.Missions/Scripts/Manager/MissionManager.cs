@@ -17,9 +17,10 @@ public class MissionManager : MonoBehaviour
                     Debug.LogError($"Cannot access Mission Manager, RC BOOL_MISSION_ENABLED is {RemoteConfig.BOOL_MISSION_ENABLED}");
                     return null;
                 }
-                
-                
-                return _instance = Resources.Load<MissionManager>("MissionManager");
+
+
+                return _instance = FindObjectOfType<MissionManager>();
+                //return _instance = Resources.Load<MissionManager>("MissionManager");
             }
 
             return _instance;
@@ -49,8 +50,8 @@ public class MissionManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        if (_instance != null)
+        
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
@@ -58,5 +59,7 @@ public class MissionManager : MonoBehaviour
         
         _instance = this;
         DontDestroyOnLoad(gameObject);
+        
+        UIHandler.Initialize();
     }
 }

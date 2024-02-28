@@ -5,15 +5,15 @@ namespace Submodule.Missions
 {
     public abstract class MissionProgressHandler
     {
-        protected MissionData _missionData;
-        protected MissionConditionsAtDifficulty _missionConditionsAtDifficulty;
+        public readonly MissionData MissionData;
+        public readonly MissionConditionsAtDifficulty MissionConditionsAtDifficulty;
         public int CurrentProgress { get; protected set; }
-        public virtual int MissionRequirement => _missionConditionsAtDifficulty.MissionRequirement;
+        public virtual int MissionRequirement => MissionConditionsAtDifficulty.MissionRequirement;
 
         public MissionProgressHandler(MissionData missionData, MissionConditionsAtDifficulty missionConditionsAtDifficulty)
         {
-            _missionData = missionData;
-            _missionConditionsAtDifficulty = missionConditionsAtDifficulty;
+            MissionData = missionData;
+            MissionConditionsAtDifficulty = missionConditionsAtDifficulty;
         }
         
         public abstract void Start();
@@ -22,20 +22,22 @@ namespace Submodule.Missions
         {
             CurrentProgress = newProgress;
             CurrentProgress = Mathf.Clamp(CurrentProgress, 0, MissionRequirement);
-            ProgressChanged();
             
-            Debug.Log($"Mission Progress on {_missionData.MissionID} is {CurrentProgress}/{MissionRequirement}");
+            if (!IsCompleted)
+                ProgressChanged();
+            
+            Debug.Log($"Mission Progress on {MissionData.MissionID} is {CurrentProgress}/{MissionRequirement}");
             
             if (IsCompleted)
                 SetAsCompleted();
         }
 
-        public virtual bool IsCompleted => CurrentProgress >= _missionConditionsAtDifficulty.MissionRequirement;
+        public virtual bool IsCompleted => CurrentProgress >= MissionConditionsAtDifficulty.MissionRequirement;
 
         public virtual void SetAsCompleted()
         {
-            Debug.Log($"Mission {_missionData.MissionID} completed");
-            _missionData.SetMissionAtDifficultyLevelCompleted(_missionConditionsAtDifficulty);
+            Debug.Log($"Mission {MissionData.MissionID} completed");
+            MissionData.SetMissionAtDifficultyLevelCompleted(MissionConditionsAtDifficulty);
             OnCompleted?.Invoke();
         }
 
